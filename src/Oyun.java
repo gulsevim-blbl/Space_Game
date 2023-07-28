@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageInputStream;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -68,6 +70,20 @@ public class Oyun extends JPanel implements KeyListener,ActionListener{
      private  int uzayGemisiX = 0;
      
      private  int dirUzayX = 20;
+     
+     public boolean KontrolEt(){
+         
+         for(Ates ates : atesler){
+             
+             if (new Rectangle(ates.getX(),ates.getY(),10,20).intersects(new Rectangle(topX,0,20,20))) {
+                 
+                 return true;
+             }
+             
+         }
+         return false;
+         
+     }
 
     public Oyun() {
         
@@ -91,6 +107,8 @@ public class Oyun extends JPanel implements KeyListener,ActionListener{
     public void paint(Graphics g) {
         
         super.paint(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+       
+        gecen_sure += 5;
         
         g.setColor(Color.red);
         
@@ -110,6 +128,14 @@ public class Oyun extends JPanel implements KeyListener,ActionListener{
             
             g.fillRect(ates.getX(), ates.getY(), 10 , 20);
        
+        }
+        if (KontrolEt()) {
+            timer.stop();
+            String message = "Kazandiniz...\n" +
+                    "Harcanan Ates :" + harcanan_ates +
+                    "\nGecen Sure :" + gecen_sure / 1000.0 + " Saniye";  
+            JOptionPane.showMessageDialog(this, message);
+            System.exit(0);
         }
     }
     
