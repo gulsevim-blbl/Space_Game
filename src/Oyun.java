@@ -111,12 +111,29 @@ public class Oyun extends JPanel implements KeyListener,ActionListener{
      
     @Override
     public void keyTyped(KeyEvent e) {
+        
+       
        
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-  
+        int c = e.getKeyCode();
+        
+        if (c == KeyEvent.VK_LEFT) {
+            if (uzayGemisiX <= 0) {
+                uzayGemisiX = 0;
+            }else{
+                uzayGemisiX -= dirUzayX;
+            }
+        }
+        else if (c == KeyEvent.VK_RIGHT) {
+            if (uzayGemisiX >= 720) {
+                uzayGemisiX = 720;
+            }else{
+                uzayGemisiX += dirUzayX;
+            }
+        }
     }
 
     @Override
