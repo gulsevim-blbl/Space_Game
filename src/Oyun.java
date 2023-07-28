@@ -13,7 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageInputStream;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 class Ates{
     
@@ -46,7 +48,9 @@ class Ates{
 
 
 public class Oyun extends JPanel implements KeyListener,ActionListener{
-
+    
+    Timer timer = new Timer(1, this);
+    
      private  int gecen_sure = 0;
      
      private  int harcanan_ates = 0;
@@ -74,6 +78,8 @@ public class Oyun extends JPanel implements KeyListener,ActionListener{
          }
         setBackground(Color.BLACK);
         
+        timer.start();
+        
         
         
     }
@@ -92,7 +98,7 @@ public class Oyun extends JPanel implements KeyListener,ActionListener{
         
         g.drawImage(image, uzayGemisiX, 490, image.getWidth() /10, image.getHeight()/10,this);
     
-        
+         
         
     }
     
@@ -121,6 +127,23 @@ public class Oyun extends JPanel implements KeyListener,ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
      
+        topX += topdirX;
+        
+        if (topX >= 750) {
+           
+            topdirX = -topdirX;
+            
+            
+        }
+        if (topX <= 0) {
+            
+            topdirX = -topdirX;
+        }
+       
+        repaint();
+       
+       
+        
     }
     
     
