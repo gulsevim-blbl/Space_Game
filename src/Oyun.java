@@ -98,8 +98,19 @@ public class Oyun extends JPanel implements KeyListener,ActionListener{
         
         g.drawImage(image, uzayGemisiX, 490, image.getWidth() /10, image.getHeight()/10,this);
     
-         
+         for(Ates ates: atesler){
+             if (ates.getY() < 0) {
+                 atesler.remove(ates);
+             }
+             
+         }
+        g.setColor(Color.BLUE);
         
+        for(Ates ates : atesler){
+            
+            g.fillRect(ates.getX(), ates.getY(), 10 , 20);
+       
+        }
     }
     
     @Override
@@ -133,6 +144,13 @@ public class Oyun extends JPanel implements KeyListener,ActionListener{
             }else{
                 uzayGemisiX += dirUzayX;
             }
+        }else if(c == KeyEvent.VK_CONTROL){
+            
+            atesler.add(new Ates(uzayGemisiX+15,470));
+            
+            harcanan_ates++;
+            
+            
         }
     }
 
@@ -143,6 +161,11 @@ public class Oyun extends JPanel implements KeyListener,ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        for(Ates ates: atesler){
+            
+            ates.setY(ates.getY() - atesdirY);
+        }
      
         topX += topdirX;
         
